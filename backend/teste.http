@@ -1,0 +1,54 @@
+### teste de cadastro de funcionario
+POST http://localhost:3000/funcionario
+Content-Type: application/json
+
+{
+    "nome":"mario",
+    "email":"mario@gmail",
+    "senha":"123"
+}
+
+###teste de logn de funcionario
+# @name LoginReq
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email":"mario@gmail",
+    "senha":"123"
+}
+
+### teste de cadastro de cliente - rota privada
+POST http://localhost:3000/cliente
+Content-Type: application/json
+Authorization: {{LoginReq.response.body.token}}
+
+{
+    "nome":"joao",
+    "email":"joao@gmail",
+    "senha":"852",
+    "cpf":"123456789"
+}
+
+### teste de cadastro de equipamento - rota privada
+POST http://localhost:3000/equipamento
+Content-Type: application/json
+Authorization: {{LoginReq.response.body.token}}
+
+{
+    "modelo":"painel solar",
+    "fabricante":"solaris",
+    "numSerie": "4587",
+    "idCliente": 1
+}
+
+### teste de cadastro de inspeção - rota privada
+POST http://localhost:3000/inspecao
+Content-Type: application/json
+Authorization: {{LoginReq.response.body.token}}
+
+{
+    "status":"REALIZADA",
+    "data":"2026-11-10",
+    "idEquipamento": 2
+}
